@@ -2,34 +2,6 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('🚨 PRONTO AIRWAYS SYSTEM LOADED 🚨');
     console.log('💰 JavaScript loading fee: $4.99');
     
-    // Fix rotating text width issue
-    function adjustRotatingTextWidth() {
-        const rotatingText = document.querySelector('.rotating-text');
-        const spans = rotatingText.querySelectorAll('span');
-        let maxWidth = 0;
-        
-        // Temporarily show all spans to measure their width
-        spans.forEach(span => {
-            span.style.position = 'static';
-            span.style.opacity = '1';
-            span.style.display = 'inline-block';
-            const width = span.offsetWidth;
-            if (width > maxWidth) {
-                maxWidth = width;
-            }
-            span.style.position = 'absolute';
-            span.style.opacity = '0';
-            span.style.display = 'block';
-        });
-        
-        // Set the container width to accommodate the longest text
-        rotatingText.style.width = (maxWidth + 20) + 'px';
-        rotatingText.style.minWidth = (maxWidth + 20) + 'px';
-    }
-    
-    // Call the function after fonts load
-    setTimeout(adjustRotatingTextWidth, 500);
-    
     // Add click tracking for "transparent" pricing
     document.querySelectorAll('button').forEach(button => {
         button.addEventListener('click', function(e) {
@@ -120,62 +92,5 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Add some random promotional popups
-    setTimeout(() => {
-        if (Math.random() > 0.5) {
-            const promos = [
-                "🚨 FLASH SALE: Upgrade to Super Priority for only $199 more!",
-                "⚡ LIMITED TIME: Free seat belt rental with any purchase over $500!",
-                "🎁 SPECIAL OFFER: Add travel insurance for 300% of ticket price!",
-                "🔥 HOT DEAL: Oxygen mask rental - now only $45/minute!",
-                "💺 EXCLUSIVE: Reserve your seat reservation for just $89.99!"
-            ];
-            setTimeout(() => {
-                alert(promos[Math.floor(Math.random() * promos.length)]);
-            }, 3000);
-        }
-    }, 5000);
-
-    // Animate priority counter
-    let priorityCount = 1000000;
-    const counterElement = document.createElement('div');
-    counterElement.style.cssText = `
-        position: fixed; bottom: 20px; right: 20px; background: linear-gradient(45deg, #ff6b6b, #ee5a52);
-        color: white; padding: 1rem; border-radius: 10px; font-weight: bold;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 1000; font-family: 'Roboto', sans-serif;
-        animation: counterPulse 2s ease-in-out infinite;
-    `;
-    counterElement.innerHTML = `
-        <div style="font-size: 0.8rem;">👑 Priority Passengers Today:</div>
-        <div style="font-size: 1.5rem; text-align: center; margin-top: 0.5rem;" id="priority-counter">${priorityCount.toLocaleString()}</div>
-    `;
-    document.body.appendChild(counterElement);
-
-    // Add counter animation
-    const counterStyle = document.createElement('style');
-    counterStyle.textContent = `
-        @keyframes counterPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-    `;
-    document.head.appendChild(counterStyle);
-
-    // Increment counter to show "everyone is priority"
-    setInterval(() => {
-        priorityCount += Math.floor(Math.random() * 50) + 10;
-        const counter = document.getElementById('priority-counter');
-        if (counter) {
-            counter.textContent = priorityCount.toLocaleString();
-        }
-    }, 2000);
-
-    // Add fee notification for scrolling
-    let scrollFeeShown = false;
-    window.addEventListener('scroll', () => {
-        if (!scrollFeeShown && window.scrollY > 100) {
-            scrollFeeShown = true;
-            console.log('💰 Scrolling fee applied: $0.99');
-        }
-    });
+    // ...existing code for other features...
 });

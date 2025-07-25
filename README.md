@@ -41,8 +41,17 @@ The site includes a custom favicon featuring:
 2. Upload the `favicon.svg` file
 3. Download the generated files and place them in the root directory
 
+### Favicon Troubleshooting:
+If favicon doesn't appear:
+1. **Hard refresh**: Ctrl+F5 (Windows) or Cmd+Shift+R (Mac)
+2. **Clear browser cache**: Go to browser settings and clear cache
+3. **Check file location**: Ensure `favicon.ico` is in the root directory (same level as `index.html`)
+4. **Wait**: Browsers can be slow to update favicons (up to 24 hours)
+5. **Try incognito mode**: Opens without cache
+
 *Favicon generation fee: $7.99*
 *Crown licensing fee: $15.99*
+*Troubleshooting support fee: $24.99*
 
 ## ⚠️ Disclaimer
 

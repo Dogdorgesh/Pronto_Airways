@@ -133,7 +133,7 @@ header {
     height: 1.2em;
     overflow: visible;
     vertical-align: top;
-    width: auto;
+    width: 100%;
     min-width: 400px;
     text-align: center;
 }
@@ -148,6 +148,7 @@ header {
     transform: translateY(100%);
     white-space: nowrap;
     text-align: center;
+    display: block;
 }
 
 .rotating-text span:nth-child(1) { 
@@ -330,13 +331,13 @@ header {
 
 .ticker-content {
     display: inline-block;
-    animation: scroll 20s linear infinite;
+    animation: scroll 60s linear infinite;
     font-size: 1.1rem;
     font-weight: 700;
 }
 
 @keyframes scroll {
-    0% { transform: translateX(100%); }
+    0% { transform: translateX(0%); }
     100% { transform: translateX(-100%); }
 }
 
@@ -460,18 +461,19 @@ footer {
 }
 
 .fee-item {
-    background: rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.95);
     padding: 2rem;
     border-radius: 15px;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255,255,255,0.2);
+    color: #333;
 }
 
 .fee-item h4 {
     font-size: 1.3rem;
     margin-bottom: 1rem;
-    color: #fff;
-    border-bottom: 2px solid rgba(255,255,255,0.3);
+    color: #333;
+    border-bottom: 2px solid #ff6b6b;
     padding-bottom: 0.5rem;
 }
 
@@ -482,9 +484,10 @@ footer {
 
 .fee-item li {
     padding: 0.5rem 0;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
     display: flex;
     justify-content: space-between;
+    color: #333;
 }
 
 .fee-disclaimer {
@@ -492,7 +495,9 @@ footer {
     margin-top: 2rem;
     font-style: italic;
     font-size: 0.9rem;
-    opacity: 0.9;
+    opacity: 1;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
 /* Priority Levels Section */
@@ -690,6 +695,7 @@ footer {
     .rotating-text {
         min-width: 250px;
         font-size: 0.9em;
+        width: 100%;
     }
     
     .form-row {
@@ -728,9 +734,28 @@ footer {
     .rotating-text {
         min-width: 200px;
         font-size: 0.8em;
+        width: 100%;
     }
     
     .rotating-text span {
         font-size: 0.9em;
     }
+}
+
+/* Simple Legal Disclaimer */
+.simple-disclaimer {
+    background: #fff3cd;
+    border: 2px solid #ffc107;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.simple-disclaimer p {
+    margin: 0.25rem 0;
+    font-weight: 600;
+    color: #333;
 }
