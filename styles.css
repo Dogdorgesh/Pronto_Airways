@@ -92,6 +92,12 @@ header {
     display: flex;
     list-style: none;
     gap: 2rem;
+    align-items: center;
+}
+
+.nav-links li {
+    display: flex;
+    align-items: center;
 }
 
 .nav-links a {
@@ -100,6 +106,8 @@ header {
     font-weight: 700;
     transition: all 0.3s ease;
     position: relative;
+    display: inline-block;
+    padding: 0.5rem 1rem;
 }
 
 .nav-links a:hover {
@@ -758,4 +766,281 @@ footer {
     margin: 0.25rem 0;
     font-weight: 600;
     color: #333;
+}
+
+/* Dark Mode Variables */
+:root {
+    --bg-primary: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+    --bg-secondary: rgba(255,255,255,0.95);
+    --text-primary: #333;
+    --text-secondary: #666;
+    --card-bg: white;
+}
+
+body.dark-mode {
+    --bg-primary: linear-gradient(45deg, #2c1810, #1a2f2a, #1e2a3a, #2a3a2e);
+    --bg-secondary: rgba(30,30,30,0.95);
+    --text-primary: #e0e0e0;
+    --text-secondary: #b0b0b0;
+    --card-bg: #2a2a2a;
+}
+
+body.dark-mode {
+    color: var(--text-primary);
+}
+
+body.dark-mode .features {
+    background: var(--bg-secondary);
+}
+
+body.dark-mode .feature-card,
+body.dark-mode .testimonial-card,
+body.dark-mode .priority-card {
+    background: var(--card-bg);
+    color: var(--text-primary);
+}
+
+/* Navigation Buttons */
+.nav-btn {
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+/* Delay Counter */
+.delay-counter {
+    background: linear-gradient(135deg, #ff4444, #cc0000);
+    color: white;
+    padding: 1.5rem 2rem;
+    text-align: center;
+}
+
+.delay-display h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    animation: urgentFlash 2s ease-in-out infinite;
+}
+
+.delay-info {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-weight: 600;
+}
+
+.delay-time {
+    color: #ffff99;
+    font-size: 1.2rem;
+}
+
+@keyframes urgentFlash {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 2rem;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 800px;
+    position: relative;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+}
+
+.close:hover {
+    color: #000;
+}
+
+/* Seat Selection */
+.seat-modal-content {
+    max-width: 900px;
+}
+
+.airplane-map {
+    background: #f0f8ff;
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 1rem 0;
+}
+
+.seat-legend {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+}
+
+.seat-map {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.5rem;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.seat {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.seat.available {
+    background: #4ecdc4;
+    color: white;
+}
+
+.seat.standard {
+    background: #45b7d1;
+    color: white;
+}
+
+.seat.premium {
+    background: linear-gradient(45deg, #ff6b6b, #ffd700);
+    color: white;
+}
+
+.seat.occupied {
+    background: #999;
+    color: #666;
+    cursor: not-allowed;
+}
+
+.seat.selected {
+    border: 3px solid #ff6b6b;
+    transform: scale(1.1);
+}
+
+.seat-selection-info {
+    background: #fff3cd;
+    border: 2px solid #ffc107;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+}
+
+/* Baggage Calculator */
+.baggage-calculator {
+    text-align: center;
+}
+
+.baggage-calculator label {
+    display: block;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.baggage-calculator input {
+    padding: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    width: 200px;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.baggage-fees {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 2rem;
+}
+
+.fee-breakdown p {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.fee-breakdown hr {
+    margin: 1rem 0;
+    border: 1px solid #ddd;
+}
+
+.baggage-note {
+    margin-top: 1rem;
+    font-style: italic;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .nav-links {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .nav-btn {
+        padding: 0.3rem 0.8rem;
+        font-size: 0.8rem;
+    }
+    
+    .delay-info {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .seat-legend {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 2% auto;
+        padding: 1rem;
+    }
 }

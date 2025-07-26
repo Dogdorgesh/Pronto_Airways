@@ -32,6 +32,8 @@
                 <li><a href="#priority">PRIORITY+</a></li>
                 <li><a href="#fees">Fees*</a></li>
                 <li><a href="#login">Login</a></li>
+                <li><button id="lang-toggle" class="nav-btn">🇮🇹 IT</button></li>
+                <li><button id="dark-toggle" class="nav-btn">🌙</button></li>
             </ul>
         </nav>
     </header>
@@ -49,14 +51,28 @@
                 </h1>
                 <p class="hero-subtitle">Experience the revolutionary concept where EVERY passenger gets priority boarding*</p>
                 <div class="cta-buttons">
-                    <button class="btn-primary pulsing">BOOK YOUR PRIORITY FLIGHT</button>
-                    <button class="btn-secondary">Learn About Our Fees*</button>
+                    <button class="btn-primary pulsing" id="hero-seat-btn">CHOOSE YOUR PRIORITY SEAT</button>
+                    <button class="btn-secondary" id="hero-baggage-btn">Calculate Baggage Fees*</button>
                 </div>
                 <div class="disclaimer">*Terms and conditions apply. Priority subject to availability. Fees may vary.</div>
             </div>
             <div class="hero-animation">
                 <div class="plane">✈️</div>
                 <div class="clouds">☁️ ☁️ ☁️</div>
+            </div>
+        </section>
+
+        <!-- Add delay counter after hero section -->
+        <section class="delay-counter">
+            <div class="container">
+                <div class="delay-display">
+                    <h3>🚨 Live Flight Status 🚨</h3>
+                    <div class="delay-info">
+                        <span class="flight-number">Flight PA-123 (Your Priority Flight)</span>
+                        <span class="delay-time">Delayed by: <span id="delay-minutes">0</span> minutes</span>
+                        <span class="delay-reason" id="delay-reason">Reason: Calculating priority passenger fees</span>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -73,7 +89,7 @@
                     <div class="feature-card">
                         <div class="icon">💰</div>
                         <h3>Transparent Pricing*</h3>
-                        <p>Base fare from $9.99! Additional fees clearly listed*</p>
+                        <p>Base fare from €9.99! Additional fees clearly listed*</p>
                         <small>*See fee schedule for complete transparency</small>
                     </div>
                     <div class="feature-card">
@@ -88,7 +104,7 @@
 
         <section class="ticker">
             <div class="ticker-content">
-                <span>🎉 NEW: Breathing fee only $5 per minute! 💨 Seat belt rental available for $15.99! 🚨 Priority boarding for ALL priority passengers! 💺 Toilet paper surcharge reduced to $12.99! 🧻 BREAKING: Gravity compensation now mandatory! 🌍 NEW SERVICE: Pay $25 to think about your destination! 🧠 SPECIAL: Oxygen molecules now available individually! ⚛️ ALERT: Window viewing requires premium subscription! 🪟 UPDATE: Blinking fee introduced at $0.99 per blink! 👁️ HOT: Priority queue now has 2.3 million priority passengers! 👑 FLASH: Boarding pass printing costs increased to $45! 🖨️ NEWS: Complaining about fees now costs $199! 😤 URGENT: Smiling during flight requires happiness license! 😊 TRENDING: Standing in line fee reduced to $29.99! 🚶 EXCLUSIVE: Premium air quality available for $99/breath! 💨</span>
+                <span>🎉 NEW: Breathing fee only €5 per minute! 💨 Seat belt rental available for €15.99! 🚨 Priority boarding for ALL priority passengers! 💺 Toilet paper surcharge reduced to €12.99! 🧻 BREAKING: Gravity compensation now mandatory! 🌍 NEW SERVICE: Pay €25 to think about your destination! 🧠 SPECIAL: Oxygen molecules now available individually! ⚛️ ALERT: Window viewing requires premium subscription! 🪟 UPDATE: Blinking fee introduced at €0.99 per blink! 👁️ HOT: Priority queue now has 2.3 million priority passengers! 👑 FLASH: Boarding pass printing costs increased to €45! 🖨️ NEWS: Complaining about fees now costs €199! 😤 URGENT: Smiling during flight requires happiness license! 😊 TRENDING: Standing in line fee reduced to €29.99! 🚶 EXCLUSIVE: Premium air quality available for €99/breath! 💨</span>
             </div>
         </section>
 
@@ -109,7 +125,7 @@
                             <option>Mega Priority*</option>
                         </select>
                     </div>
-                    <button class="btn-book">SEARCH FLIGHTS (Fee: $19.99)</button>
+                    <button class="btn-book">SEARCH FLIGHTS (Fee: €19.99)</button>
                 </div>
             </div>
         </section>
@@ -121,17 +137,17 @@
                     <div class="testimonial-card">
                         <div class="quote">"I was priority passenger #847,392 and the experience was... unique!"</div>
                         <div class="author">- Karen S. (Priority Gold Member)</div>
-                        <div class="rating">⭐⭐⭐⭐⭐ (Rating fee: $4.99)</div>
+                        <div class="rating">⭐⭐⭐⭐⭐ (Rating fee: €4.99)</div>
                     </div>
                     <div class="testimonial-card">
                         <div class="quote">"The breathing fee really made me appreciate every breath. Totally worth it!"</div>
                         <div class="author">- Mike R. (Priority Platinum Plus)</div>
-                        <div class="rating">⭐⭐⭐⭐⭐ (Review submission fee: $7.99)</div>
+                        <div class="rating">⭐⭐⭐⭐⭐ (Review submission fee: €7.99)</div>
                     </div>
                     <div class="testimonial-card">
                         <div class="quote">"My password is still safely stored in their text file. Great security!"</div>
-                        <div class="author">- Anonymous (Security fee: $12.99)</div>
-                        <div class="rating">⭐⭐⭐⭐⭐ (Anonymity fee: $19.99)</div>
+                        <div class="author">- Anonymous (Security fee: €12.99)</div>
+                        <div class="rating">⭐⭐⭐⭐⭐ (Anonymity fee: €19.99)</div>
                     </div>
                 </div>
             </div>
@@ -144,32 +160,32 @@
                     <div class="fee-item">
                         <h4>Basic Services</h4>
                         <ul>
-                            <li>Seat assignment: $25.00</li>
-                            <li>Seat belt rental: $15.99</li>
-                            <li>Oxygen access: $5.00/min</li>
-                            <li>Gravity compensation: $12.00</li>
+                            <li>Seat assignment: €25.00</li>
+                            <li>Seat belt rental: €15.99</li>
+                            <li>Oxygen access: €5.00/min</li>
+                            <li>Gravity compensation: €12.00</li>
                         </ul>
                     </div>
                     <div class="fee-item">
                         <h4>Premium Experience</h4>
                         <ul>
-                            <li>Priority confirmation: $29.99</li>
-                            <li>Boarding pass printing: $8.50</li>
-                            <li>Looking out window: $22.00</li>
-                            <li>Thinking about flying: $3.99</li>
+                            <li>Priority confirmation: €29.99</li>
+                            <li>Boarding pass printing: €8.50</li>
+                            <li>Looking out window: €22.00</li>
+                            <li>Thinking about flying: €3.99</li>
                         </ul>
                     </div>
                     <div class="fee-item">
                         <h4>Convenience Fees</h4>
                         <ul>
-                            <li>Online booking: $19.99</li>
-                            <li>Phone booking: $39.99</li>
-                            <li>In-person booking: $59.99</li>
-                            <li>Telepathic booking: $99.99</li>
+                            <li>Online booking: €19.99</li>
+                            <li>Phone booking: €39.99</li>
+                            <li>In-person booking: €59.99</li>
+                            <li>Telepathic booking: €99.99</li>
                         </ul>
                     </div>
                 </div>
-                <p class="fee-disclaimer">*Fees subject to change. Additional fees may apply to fee viewing. Fee calculation fee: $14.99</p>
+                <p class="fee-disclaimer">*Fees subject to change. Additional fees may apply to fee viewing. Fee calculation fee: €14.99</p>
             </div>
         </section>
 
@@ -179,18 +195,18 @@
                 <div class="priority-grid">
                     <div class="priority-card basic">
                         <h3>Priority Economy</h3>
-                        <div class="price">$9.99*</div>
+                        <div class="price">€9.99*</div>
                         <ul>
                             <li>✅ Basic priority access</li>
                             <li>✅ Standard breathing allocation</li>
                             <li>✅ Shared oxygen mask</li>
                             <li>❌ Seat guarantee</li>
                         </ul>
-                        <div class="small-print">*Plus $200 in mandatory fees</div>
+                        <div class="small-print">*Plus €200 in mandatory fees</div>
                     </div>
                     <div class="priority-card premium">
                         <h3>Super Priority</h3>
-                        <div class="price">$99.99*</div>
+                        <div class="price">€99.99*</div>
                         <div class="badge">MOST POPULAR!</div>
                         <ul>
                             <li>✅ Enhanced priority access</li>
@@ -198,18 +214,18 @@
                             <li>✅ Personal oxygen molecule</li>
                             <li>✅ Seat suggestion</li>
                         </ul>
-                        <div class="small-print">*Plus $400 in convenience fees</div>
+                        <div class="small-print">*Plus €400 in convenience fees</div>
                     </div>
                     <div class="priority-card luxury">
                         <h3>Ultra Priority</h3>
-                        <div class="price">$299.99*</div>
+                        <div class="price">€299.99*</div>
                         <ul>
                             <li>✅ Ultimate priority access</li>
                             <li>✅ Unlimited breathing*</li>
                             <li>✅ Oxygen tank rental included</li>
                             <li>✅ Actual seat (subject to availability)</li>
                         </ul>
-                        <div class="small-print">*Plus $800 in processing fees. *5 breath limit</div>
+                        <div class="small-print">*Plus €800 in processing fees. *5 breath limit</div>
                     </div>
                 </div>
             </div>
@@ -244,6 +260,57 @@
             </div>
         </section>
     </main>
+
+    <!-- Seat Selection Modal -->
+    <div id="seat-modal" class="modal">
+        <div class="modal-content seat-modal-content">
+            <span class="close">&times;</span>
+            <h2>🪑 Select Your Premium Seat</h2>
+            <div class="airplane-map">
+                <div class="seat-legend">
+                    <span class="legend-item"><span class="seat available"></span> Available (€100-1000)</span>
+                    <span class="legend-item"><span class="seat premium"></span> Premium (€700-3000)</span>
+                    <span class="legend-item"><span class="seat occupied"></span> Occupied (includes €15-40 seats)</span>
+                </div>
+                <div class="seat-map">
+                    <!-- Rows will be generated by JavaScript -->
+                </div>
+            </div>
+            <div class="seat-selection-info">
+                <p>Selected Seat: <span id="selected-seat">None</span></p>
+                <p>Seat Fee: <span id="seat-fee">€0.00</span></p>
+                <p>Seat Assignment Fee: €25.00</p>
+                <p>Priority Seat Processing: €15.99</p>
+                <p><strong>Total: <span id="seat-total">€40.99</span></strong></p>
+                <button class="btn-primary" id="confirm-seat">Confirm Seat Selection (Fee: €5.99)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Baggage Calculator Modal -->
+    <div id="baggage-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>🧳 Baggage Weight Calculator</h2>
+            <div class="baggage-calculator">
+                <label for="bag-weight">Enter baggage weight (kg):</label>
+                <input type="number" id="bag-weight" min="0" max="50" value="0">
+                <div class="baggage-fees">
+                    <div class="fee-breakdown">
+                        <p>Base baggage fee: <span id="base-fee">€25.00</span></p>
+                        <p>Weight surcharge: <span id="weight-fee">€0.00</span></p>
+                        <p>Baggage handling: <span id="handling-fee">€15.99</span></p>
+                        <p>Security screening: <span id="security-fee">€8.99</span></p>
+                        <p>Baggage tag: <span id="tag-fee">€3.99</span></p>
+                        <p>Gravity compensation: <span id="gravity-fee">€12.00</span></p>
+                        <hr>
+                        <p><strong>Total: <span id="baggage-total">€65.97</span></strong></p>
+                    </div>
+                    <p class="baggage-note">*Note: Even 0kg bags incur base processing fees for security reasons</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer>
         <div class="container">
