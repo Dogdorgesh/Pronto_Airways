@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let delayMinutes = Math.floor(Math.random() * 91) + 5; // Start with random delay 5-95 minutes
     let selectedSeat = null;
     let delayUpdates = 0; // Counter for delay updates
+    let autoPopupTriggered = false;
     
     // Initialize delay counter
     initDelayCounter();
@@ -47,8 +48,10 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('dark-toggle').addEventListener('click', toggleDarkMode);
     document.getElementById('hero-seat-btn').addEventListener('click', openSeatModal);
     document.getElementById('hero-baggage-btn').addEventListener('click', openBaggageModal);
+    document.getElementById('spin-wheel-btn').addEventListener('click', openSpinModal);
     document.getElementById('bag-weight').addEventListener('input', calculateBaggageFees);
     document.getElementById('confirm-seat').addEventListener('click', confirmSeatSelection);
+    document.getElementById('spin-button').addEventListener('click', spinWheel);
     
     // Modal close handlers
     document.querySelectorAll('.close').forEach(closeBtn => {
@@ -608,5 +611,184 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    function openSpinModal() {
+        document.getElementById('spin-modal').style.display = 'block';
+        // Reset wheel and result
+        document.getElementById('wheel').style.transform = 'rotate(0deg)';
+        document.getElementById('spin-result').style.display = 'none';
+        document.getElementById('spin-button').disabled = false;
+        document.getElementById('spin-button').textContent = 'SPIN THE WHEEL! (€9.99)';
+    }
+
+    function spinWheel() {
+        const wheel = document.getElementById('wheel');
+        const button = document.getElementById('spin-button');
+        const resultDiv = document.getElementById('spin-result');
+        
+        // Disable button during spin
+        button.disabled = true;
+        button.textContent = 'SPINNING... (Processing fee: €2.99)';
+        
+        // Calculate random spin (multiple full rotations + final position)
+        const spins = 5 + Math.random() * 3; // 5-8 full rotations
+        const finalAngle = Math.random() * 360;
+        const totalRotation = (spins * 360) + finalAngle;
+        
+        // Apply spin animation
+        wheel.style.transform = `rotate(${totalRotation}deg)`;
+        
+        // Determine result based on final angle
+        setTimeout(() => {
+            const normalizedAngle = finalAngle % 360;
+            const sectionAngle = 360 / 8; // 8 sections = 45 degrees each
+            const sectionIndex = Math.floor(normalizedAngle / sectionAngle);
+            
+            const results = [
+                {
+                    id: 'free-upgrade',
+                    title: '🎉 FREE UPGRADE! 🎉',
+                    text: 'Congratulations! You\'ve won a FREE upgrade to Premium Economy!',
+                    disclaimer: '*Upgrade subject to availability. Upgrade confirmation fee: €99.99. Seat assignment fee: €49.99. Premium air fee: €29.99. Terms and conditions apply.'
+                },
+                {
+                    id: 'extra-fee',
+                    title: '💰 SPECIAL CHARGE! 💰',
+                    text: 'You\'ve been selected for our exclusive €50 Experience Enhancement Fee!',
+                    disclaimer: 'This fee ensures your flight experience meets our premium standards. Non-refundable. Additional processing fee: €12.99.'
+                },
+                {
+                    id: 'priority-boarding',
+                    title: '✈️ PRIORITY BOARDING! ✈️',
+                    text: 'You\'ve won Priority Boarding Group A!',
+                    disclaimer: '*Priority boarding confirmation requires validation fee: €39.99. Lane access fee: €19.99. Boarding pass printing fee: €8.99.'
+                },
+                {
+                    id: 'baggage-fee',
+                    title: '🧳 BAGGAGE BONUS! 🧳',
+                    text: 'Surprise! Your baggage has been selected for premium handling!',
+                    disclaimer: 'Premium baggage handling fee: €30. Includes extra security screening (€15), priority carousel placement (€10), and gentle handling guarantee (€5).'
+                },
+                {
+                    id: 'seat-fee',
+                    title: '💺 SEAT SELECTION! 💺',
+                    text: 'Your seat has been automatically upgraded to Premium Comfort!',
+                    disclaimer: 'Premium comfort seat fee: €25. Includes ergonomic positioning (€10), enhanced cushioning (€10), and seat assignment confirmation (€5).'
+                },
+                {
+                    id: 'breathing-fee',
+                    title: '💨 PREMIUM AIR! 💨',
+                    text: 'You\'ve qualified for our Enhanced Oxygen Experience!',
+                    disclaimer: 'Premium air quality fee: €15. Ensures 21% oxygen content throughout flight. Air quality testing fee: €5. Breathing license validation: €3.'
+                },
+                {
+                    id: 'gravity-fee',
+                    title: '🌍 GRAVITY SERVICE! 🌍',
+                    text: 'Congratulations! You\'ve been enrolled in our Gravity Compensation Program!',
+                    disclaimer: 'Gravity compensation fee: €20. Ensures consistent downward force during flight. Includes altitude adjustment monitoring and landing impact cushioning.'
+                },
+                {
+                    id: 'happiness-fee',
+                    title: '😊 HAPPINESS GUARANTEE! 😊',
+                    text: 'You\'ve won our Mandatory Happiness Enhancement Package!',
+                    disclaimer: 'Happiness guarantee fee: €35. Includes smile monitoring, mood elevation services, and satisfaction verification. Joy insurance: €10. Non-transferable.'
+                }
+            ];
+            
+            const result = results[sectionIndex];
+            
+            // Show result
+            document.getElementById('result-title').textContent = result.title;
+            document.getElementById('result-text').textContent = result.text;
+            document.getElementById('result-disclaimer').textContent = result.disclaimer;
+            resultDiv.style.display = 'block';
+            
+            // Update button
+            button.textContent = 'SPIN AGAIN? (€9.99 + Previous Fees)';
+            button.disabled = false;
+            
+            // Add to running total (satirical)
+            setTimeout(() => {
+                alert(`🎰 Spin completed! 
+                
+Your wheel result has been applied to your account.
+
+Total charges today: €${(Math.random() * 200 + 150).toFixed(2)}
+
+Thank you for playing Pronto Airways Wheel of Fortune!
+                
+*Wheel participation fee: €9.99
+*Result processing fee: €7.99  
+*Congratulations notification fee: €4.99`);
+            }, 2000);
+            
+        }, 4000); // Wait for spin animation to complete
+    }
+
+    // Auto-popup functionality
+    
+    // Randomly show spin modal within 1 minute of page load
+    function scheduleAutoPopup() {
+        if (autoPopupTriggered) return;
+        
+        // Random time between 10-60 seconds
+        const randomDelay = Math.random() * 50000 + 10000; // 10-60 seconds
+        
+        setTimeout(() => {
+            if (!autoPopupTriggered) {
+                autoPopupTriggered = true;
+                showAutoSpinPopup();
+            }
+        }, randomDelay);
+    }
+    
+    function showAutoSpinPopup() {
+        // Create a special auto-popup overlay
+        const autoPopup = document.createElement('div');
+        autoPopup.className = 'auto-popup-overlay';
+        autoPopup.innerHTML = `
+            <div class="auto-popup-content">
+                <h2>🎰 SURPRISE! 🎰</h2>
+                <p>You've been randomly selected for our <strong>EXCLUSIVE</strong> Wheel of Fortune!</p>
+                <p class="popup-offer">Limited time offer - Spin for FREE!*</p>
+                <div class="popup-buttons">
+                    <button class="btn-primary" onclick="acceptAutoSpin()">YES! SPIN NOW!</button>
+                    <button class="btn-secondary" onclick="declineAutoSpin()">Maybe Later (€5 fee applies)</button>
+                </div>
+                <p class="popup-disclaimer">*Participation still requires €9.99 processing fee</p>
+            </div>
+        `;
+        document.body.appendChild(autoPopup);
+        
+        // Auto-accept after 10 seconds if no response
+        setTimeout(() => {
+            if (document.querySelector('.auto-popup-overlay')) {
+                acceptAutoSpin();
+            }
+        }, 10000);
+    }
+    
+    window.acceptAutoSpin = function() {
+        const popup = document.querySelector('.auto-popup-overlay');
+        if (popup) {
+            popup.remove();
+            openSpinModal();
+            // Show additional "congratulations" message
+            setTimeout(() => {
+                alert('🎉 Congratulations! You\'ve avoided the "Maybe Later" fee of €5! \n\nNow proceeding to wheel (€9.99 participation fee still applies)');
+            }, 500);
+        }
+    };
+    
+    window.declineAutoSpin = function() {
+        const popup = document.querySelector('.auto-popup-overlay');
+        if (popup) {
+            popup.remove();
+            alert('💸 "Maybe Later" fee of €5.00 has been charged to your account!\n\nDon\'t worry, the wheel will be available anytime in our navigation menu!');
+        }
+    };
+
+    // Start the auto-popup timer
+    scheduleAutoPopup();
+
     // ...existing code for other features...
 });
