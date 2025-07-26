@@ -16,6 +16,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <audio id="tarantella-audio" src="tarantella.mp3" autoplay hidden></audio>
+    <script>
+        window.addEventListener('DOMContentLoaded', function() {
+            var audio = document.getElementById('tarantella-audio');
+            if (audio) {
+                audio.play().catch(function(){ /* Autoplay may be blocked */ });
+            }
+        });
+    </script>
+    
     <div class="flash-banner">
         <div class="flash-text">🚨 BREAKING: ALL PASSENGERS NOW PRIORITY! 🚨</div>
     </div>
