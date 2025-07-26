@@ -77,11 +77,6 @@ header {
     animation: pulse 2s ease-in-out infinite;
 }
 
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-}
-
 .tagline {
     font-size: 0.9rem;
     color: #666;
