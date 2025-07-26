@@ -33,6 +33,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize seat map
     initSeatMap();
     
+    // Initialize chatbot
+    initChatbot();
+    
     // Event listeners
     document.getElementById('lang-toggle').addEventListener('click', toggleLanguage);
     document.getElementById('dark-toggle').addEventListener('click', toggleDarkMode);
@@ -392,5 +395,93 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    function initChatbot() {
+        const chatbotToggle = document.getElementById('chatbot-toggle');
+        const chatbotWidget = document.getElementById('chatbot-widget');
+        const chatbotInput = document.getElementById('chatbot-input');
+        const chatbotSend = document.getElementById('chatbot-send');
+        const chatbotMessages = document.getElementById('chatbot-messages');
+        
+        let isMinimized = false;
+        
+        // Toggle chatbot
+        chatbotToggle.addEventListener('click', function() {
+            isMinimized = !isMinimized;
+            chatbotWidget.classList.toggle('minimized', isMinimized);
+        });
+        
+        // Send message
+        function sendMessage() {
+            const message = chatbotInput.value.trim();
+            if (!message) return;
+            
+            // Add user message
+            addMessage(message, 'user');
+            chatbotInput.value = '';
+            
+            // Calculate character fee
+            const charFee = (message.length * 0.99).toFixed(2);
+            
+            // Add bot response after delay
+            setTimeout(() => {
+                const response = getBotResponse(message);
+                addMessage(response + ` (Character fee: €${charFee})`, 'bot');
+            }, 1000);
+        }
+        
+        chatbotSend.addEventListener('click', sendMessage);
+        chatbotInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+        
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `${sender}-message`;
+            
+            const bubbleDiv = document.createElement('div');
+            bubbleDiv.className = 'message-bubble';
+            bubbleDiv.textContent = text;
+            
+            messageDiv.appendChild(bubbleDiv);
+            chatbotMessages.appendChild(messageDiv);
+            
+            // Scroll to bottom
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+        
+        function getBotResponse(userMessage) {
+            const responses = [
+                "I understand your concern, but have you considered our Premium Concern Package for only €29.99?",
+                "That's a great question! The answer will cost €15.99 to access.",
+                "I'd love to help! First, please pay the Support Access Fee of €19.99.",
+                "Your issue is very common. We offer a Common Issue Resolution Service for €39.99.",
+                "I see you're frustrated. Our Frustration Management Program is available for €24.99!",
+                "For technical support, please upgrade to our Premium Support Package (€49.99).",
+                "I'm sorry, but free support ended in 2019. Current support starts at €12.99.",
+                "Have you tried turning it off and paying our Technical Assistance Fee of €22.99?",
+                "Your message has been forwarded to our Fee Department. Processing fee: €8.99.",
+                "Great news! We can solve this with our Problem Solution Subscription (€99.99/month)!"
+            ];
+            
+            // Special responses for specific keywords
+            if (userMessage.toLowerCase().includes('free')) {
+                return "Did you say 'free'? That word isn't in our vocabulary! Everything has a fee here. 💰";
+            }
+            if (userMessage.toLowerCase().includes('refund')) {
+                return "Refunds are available through our Refund Request Service for €199.99 (non-refundable).";
+            }
+            if (userMessage.toLowerCase().includes('help')) {
+                return "I'm here to help... for a small fee! Our Basic Help Package starts at €14.99.";
+            }
+            if (userMessage.toLowerCase().includes('complaint')) {
+                return "Filing a complaint? That'll be €49.99. Want to complain about the complaint fee? That's another €25.99!";
+            }
+            
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+    }
+    
     // ...existing code for other features...
 });

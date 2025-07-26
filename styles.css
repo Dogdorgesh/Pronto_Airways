@@ -1039,3 +1039,124 @@ body.dark-mode .priority-card {
         padding: 1rem;
     }
 }
+
+/* Chatbot Widget */
+.chatbot-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 350px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    z-index: 9999;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.chatbot-widget.minimized .chatbot-body {
+    display: none;
+}
+
+.chatbot-header {
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+}
+
+.chatbot-header:hover {
+    background: linear-gradient(45deg, #ee5a52, #44a08d);
+}
+
+.chatbot-close {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.chatbot-body {
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chatbot-messages {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    background: #f8f9fa;
+}
+
+.message-bubble {
+    background: #e9ecef;
+    padding: 0.8rem 1rem;
+    border-radius: 15px;
+    margin-bottom: 0.5rem;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.bot-message {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.bot-message .message-bubble {
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    color: white;
+}
+
+.user-message {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.user-message .message-bubble {
+    background: #007bff;
+    color: white;
+}
+
+.chatbot-input {
+    display: flex;
+    padding: 1rem;
+    background: white;
+    border-top: 1px solid #dee2e6;
+}
+
+.chatbot-input input {
+    flex: 1;
+    padding: 0.5rem;
+    border: 2px solid #ddd;
+    border-radius: 20px;
+    margin-right: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.chatbot-input button {
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.chatbot-input button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .chatbot-widget {
+        width: 90%;
+        right: 5%;
+        bottom: 10px;
+    }
+}
