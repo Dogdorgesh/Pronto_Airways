@@ -16,12 +16,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <audio id="tarantella-audio" src="tarantella.mp3" autoplay hidden></audio>
+    <audio id="tarantella-audio" src="tarantella.mp3" autoplay muted style="display:none"></audio>
     <script>
         window.addEventListener('DOMContentLoaded', function() {
             var audio = document.getElementById('tarantella-audio');
             if (audio) {
-                audio.play().catch(function(error){ 
+                audio.play().then(function() {
+                    audio.muted = false;
+                }).catch(function(error){ 
                     console.log('Audio autoplay was blocked:', error); 
                 });
             }
