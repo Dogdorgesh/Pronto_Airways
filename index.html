@@ -27,7 +27,12 @@
                 <h1>PRONTO AIRWAYS</h1>
                 <span class="tagline">✈️ Priority for Everyone! ✈️</span>
             </div>
-            <ul class="nav-links">
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="nav-links">
                 <li><a href="#book">BOOK NOW*</a></li>
                 <li><a href="#priority">PRIORITY+</a></li>
                 <li><a href="#fees">Fees*</a></li>
@@ -331,6 +336,17 @@
                 <button id="chatbot-send">Send (€2.99)</button>
             </div>
         </div>
+    </div>
+
+    <!-- Passenger Counter Widget -->
+    <div id="passenger-counter" class="passenger-counter">
+        <div class="counter-header">
+            <span class="counter-icon">👥</span>
+            <span class="counter-title">Priority Passengers Online</span>
+        </div>
+        <div class="counter-number" id="passenger-count">0</div>
+        <div class="counter-subtitle">Currently browsing for priority seats</div>
+        <div class="counter-warning">⚠️ High demand! Prices may increase</div>
     </div>
 
     <footer>

@@ -36,6 +36,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize chatbot
     initChatbot();
     
+    // Initialize passenger counter
+    initPassengerCounter();
+     
+    // Initialize mobile menu
+    initMobileMenu();
+    
     // Event listeners
     document.getElementById('lang-toggle').addEventListener('click', toggleLanguage);
     document.getElementById('dark-toggle').addEventListener('click', toggleDarkMode);
@@ -403,11 +409,51 @@ document.addEventListener('DOMContentLoaded', function() {
         const chatbotMessages = document.getElementById('chatbot-messages');
         
         let isMinimized = false;
+        let isMobileCircle = false;
+        
+        // Check if mobile and set circle mode
+        function checkMobileMode() {
+            if (window.innerWidth <= 768) {
+                if (!isMobileCircle) {
+                    chatbotWidget.classList.add('mobile-circle');
+                    isMobileCircle = true;
+                    isMinimized = true;
+                }
+            } else {
+                if (isMobileCircle) {
+                    chatbotWidget.classList.remove('mobile-circle');
+                    isMobileCircle = false;
+                    isMinimized = false;
+                    chatbotWidget.classList.remove('minimized');
+                }
+            }
+        }
+        
+        // Initial check
+        checkMobileMode();
+        
+        // Check on resize
+        window.addEventListener('resize', checkMobileMode);
         
         // Toggle chatbot
         chatbotToggle.addEventListener('click', function() {
-            isMinimized = !isMinimized;
-            chatbotWidget.classList.toggle('minimized', isMinimized);
+            if (isMobileCircle) {
+                // On mobile, expand to full chat
+                chatbotWidget.classList.remove('mobile-circle');
+                chatbotWidget.classList.remove('minimized');
+                isMobileCircle = false;
+                isMinimized = false;
+            } else {
+                // Normal toggle behavior
+                isMinimized = !isMinimized;
+                chatbotWidget.classList.toggle('minimized', isMinimized);
+                
+                // On mobile, if minimizing, go back to circle
+                if (isMinimized && window.innerWidth <= 768) {
+                    chatbotWidget.classList.add('mobile-circle');
+                    isMobileCircle = true;
+                }
+            }
         });
         
         // Send message
@@ -481,6 +527,85 @@ document.addEventListener('DOMContentLoaded', function() {
             
             return responses[Math.floor(Math.random() * responses.length)];
         }
+    }
+    
+    function initPassengerCounter() {
+        const passengerCountElement = document.getElementById('passenger-count');
+        let currentCount = Math.floor(Math.random() * 50000) + 25000; // Start between 25k-75k
+        
+        // Display initial count
+        updatePassengerCount(currentCount);
+        
+        // Update counter every 3-8 seconds
+        setInterval(() => {
+            // Random change between -500 to +1000 (usually increasing due to "high demand")
+            const change = Math.floor(Math.random() * 1500) - 500;
+            currentCount = Math.max(currentCount + change, 10000); // Never go below 10k
+            
+            // Occasionally add big spikes for "viral moments"
+            if (Math.random() > 0.95) {
+                currentCount += Math.floor(Math.random() * 5000) + 2000;
+            }
+            
+            updatePassengerCount(currentCount);
+        }, Math.random() * 5000 + 3000); // 3-8 seconds
+        
+        function updatePassengerCount(count) {
+            // Animate the number change
+            passengerCountElement.style.animation = 'none';
+            setTimeout(() => {
+                passengerCountElement.textContent = count.toLocaleString();
+                passengerCountElement.style.animation = 'numberChange 1s ease-in-out';
+            }, 10);
+            
+            // Update warning based on count
+            const warningElement = document.querySelector('.counter-warning');
+            if (count > 60000) {
+                warningElement.textContent = '🚨 EXTREME demand! Prices rising fast!';
+                warningElement.style.background = 'rgba(255,0,0,0.3)';
+            } else if (count > 45000) {
+                warningElement.textContent = '⚠️ Very high demand! Book now!';
+                warningElement.style.background = 'rgba(255,165,0,0.3)';
+            } else {
+                warningElement.textContent = '⚠️ High demand! Prices may increase';
+                warningElement.style.background = 'rgba(255,255,255,0.2)';
+            }
+        }
+    }
+    
+    function initMobileMenu() {
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+        
+        hamburger.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            
+            // Animate hamburger
+            hamburger.classList.toggle('active');
+            
+            // Charge fee for menu interaction
+            if (Math.random() > 0.8) {
+                setTimeout(() => {
+                    alert('Menu interaction fee: €1.99 has been applied to your account!');
+                }, 1000);
+            }
+        });
+        
+        // Close menu when clicking on links
+        document.querySelectorAll('.nav-links a, .nav-links button').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!hamburger.contains(event.target) && !navLinks.contains(event.target)) {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
     }
     
     // ...existing code for other features...
