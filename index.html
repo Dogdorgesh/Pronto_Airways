@@ -21,7 +21,9 @@
         window.addEventListener('DOMContentLoaded', function() {
             var audio = document.getElementById('tarantella-audio');
             if (audio) {
-                audio.play().catch(function(){ /* Autoplay may be blocked */ });
+                audio.play().catch(function(error){ 
+                    console.log('Audio autoplay was blocked:', error); 
+                });
             }
         });
     </script>
